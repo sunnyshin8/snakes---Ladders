@@ -38,7 +38,6 @@ function addSnakesAndLadders() {
         const snake = document.createElement('div');
         snake.classList.add('snake');
         const startCell = document.getElementById(`cell-${start}`);
-        const endCell = document.getElementById(`cell-${snakes[start]}`);
         startCell.appendChild(snake);
         // Positioning logic can be improved
         snake.style.width = '50px';
@@ -50,7 +49,6 @@ function addSnakesAndLadders() {
         const ladder = document.createElement('div');
         ladder.classList.add('ladder');
         const startCell = document.getElementById(`cell-${start}`);
-        const endCell = document.getElementById(`cell-${ladders[start]}`);
         startCell.appendChild(ladder);
         // Positioning logic can be improved
         ladder.style.width = '50px';

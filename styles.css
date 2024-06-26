@@ -17,7 +17,6 @@ h1 {
     border: 2px solid #333;
     margin-top: 20px;
     position: relative;
-    perspective: 1000px;
 }
 
 #board div {
@@ -28,8 +27,16 @@ h1 {
     align-items: center;
     border: 1px solid #ccc;
     position: relative;
-    background: linear-gradient(135deg, #e0e0e0, #ffffff, #e0e0e0);
+    background: linear-gradient(135deg, #f8e5e5, #ff9999, #ffcccc);
     box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.1), inset -2px -2px 5px rgba(255, 255, 255, 0.7);
+}
+
+#board div:nth-child(odd) {
+    background: linear-gradient(135deg, #e5f8e5, #99ff99, #ccffcc);
+}
+
+#board div:nth-child(even) {
+    background: linear-gradient(135deg, #e5e5f8, #9999ff, #ccccff);
 }
 
 .ladder, .snake {
@@ -39,7 +46,7 @@ h1 {
 }
 
 .ladder {
-    background-image: url('assests/ladder.png'); /* Replace with ladder image URL */
+    background-image: url('/assests/ladder.png'); /* Replace with ladder image URL */
 }
 
 .snake {
@@ -53,19 +60,19 @@ h1 {
 }
 
 .player1 {
-    background-color: red;
+    background-color: yellow;
 }
 
 .player2 {
-    background-color: blue;
+    background-color: red;
 }
 
 .player3 {
-    background-color: green;
+    background-color: blue;
 }
 
 .player4 {
-    background-color: yellow;
+    background-color: rgb(75, 0, 128);
 }
 
 #controls {
