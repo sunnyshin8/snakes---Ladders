@@ -36,7 +36,7 @@ h1 {
 }
 
 .ladder {
-    background-image: url('ladder.png'); /* Replace with ladder image URL */
+    background-image: url('assests/ladder.png');
 }
 
 .snake {
