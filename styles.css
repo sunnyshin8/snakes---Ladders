@@ -46,11 +46,11 @@ h1 {
 }
 
 .ladder {
-    background-image: url('/assests/ladder.png'); /* Replace with ladder image URL */
+    background-image: url('ladder.png'); /* Replace with ladder image URL */
 }
 
 .snake {
-    background-image: url('/assests/snake.png'); /* Replace with snake image URL */
+    background-image: url('snake.png'); /* Replace with snake image URL */
 }
 
 .player {
@@ -72,7 +72,7 @@ h1 {
 }
 
 .player4 {
-    background-color: rgb(75, 0, 128);
+    background-color: green;
 }
 
 #controls {

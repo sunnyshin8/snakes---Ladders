@@ -38,23 +38,39 @@ function addSnakesAndLadders() {
         const snake = document.createElement('div');
         snake.classList.add('snake');
         const startCell = document.getElementById(`cell-${start}`);
-        startCell.appendChild(snake);
-        // Positioning logic can be improved
-        snake.style.width = '50px';
-        snake.style.height = '200px';
-        snake.style.transform = `rotate(${Math.random() * 360}deg)`;
+        const endCell = document.getElementById(`cell-${snakes[start]}`);
+        board.appendChild(snake);
+        positionElement(snake, startCell, endCell);
     });
 
     Object.keys(ladders).forEach(start => {
         const ladder = document.createElement('div');
         ladder.classList.add('ladder');
         const startCell = document.getElementById(`cell-${start}`);
-        startCell.appendChild(ladder);
-        // Positioning logic can be improved
-        ladder.style.width = '50px';
-        ladder.style.height = '200px';
-        ladder.style.transform = `rotate(${Math.random() * 360}deg)`;
+        const endCell = document.getElementById(`cell-${ladders[start]}`);
+        board.appendChild(ladder);
+        positionElement(ladder, startCell, endCell);
     });
+}
+
+function positionElement(element, startCell, endCell) {
+    const startRect = startCell.getBoundingClientRect();
+    const endRect = endCell.getBoundingClientRect();
+
+    const startX = startRect.left + startRect.width / 2;
+    const startY = startRect.top + startRect.height / 2;
+    const endX = endRect.left + endRect.width / 2;
+    const endY = endRect.top + endRect.height / 2;
+
+    const width = Math.hypot(endX - startX, endY - startY);
+    const angle = Math.atan2(endY - startY, endX - startX) * 180 / Math.PI;
+
+    element.style.width = `${width}px`;
+    element.style.transform = `rotate(${angle}deg)`;
+    element.style.transformOrigin = '0 0';
+    element.style.position = 'absolute';
+    element.style.left = `${startX - board.getBoundingClientRect().left}px`;
+    element.style.top = `${startY - board.getBoundingClientRect().top}px`;
 }
 
 addSnakesAndLadders();
