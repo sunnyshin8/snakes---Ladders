@@ -17,6 +17,7 @@ h1 {
     border: 2px solid #333;
     margin-top: 20px;
     position: relative;
+    perspective: 1000px;
 }
 
 #board div {
@@ -27,6 +28,8 @@ h1 {
     align-items: center;
     border: 1px solid #ccc;
     position: relative;
+    background: linear-gradient(135deg, #e0e0e0, #ffffff, #e0e0e0);
+    box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.1), inset -2px -2px 5px rgba(255, 255, 255, 0.7);
 }
 
 .ladder, .snake {
@@ -36,11 +39,11 @@ h1 {
 }
 
 .ladder {
-    background-image: url('assests/ladder.png');
+    background-image: url('assests/ladder.png'); /* Replace with ladder image URL */
 }
 
 .snake {
-    background-image: url('snake.png'); /* Replace with snake image URL */
+    background-image: url('/assests/snake.png'); /* Replace with snake image URL */
 }
 
 .player {
