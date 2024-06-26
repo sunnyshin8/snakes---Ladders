@@ -16,6 +16,7 @@ h1 {
     grid-template-rows: repeat(10, 50px);
     border: 2px solid #333;
     margin-top: 20px;
+    position: relative;
 }
 
 #board div {
@@ -25,6 +26,21 @@ h1 {
     justify-content: center;
     align-items: center;
     border: 1px solid #ccc;
+    position: relative;
+}
+
+.ladder, .snake {
+    position: absolute;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.ladder {
+    background-image: url('ladder.png'); /* Replace with ladder image URL */
+}
+
+.snake {
+    background-image: url('snake.png'); /* Replace with snake image URL */
 }
 
 .player {

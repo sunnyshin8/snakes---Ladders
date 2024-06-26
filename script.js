@@ -32,6 +32,35 @@ players.forEach(player => {
 const snakes = { 16: 6, 47: 26, 49: 11, 56: 53, 62: 19, 64: 60, 87: 24, 93: 73, 95: 75, 98: 78 };
 const ladders = { 1: 38, 4: 14, 9: 31, 21: 42, 28: 84, 36: 44, 51: 67, 71: 91, 80: 100 };
 
+// Add ladders and snakes to the board
+function addSnakesAndLadders() {
+    Object.keys(snakes).forEach(start => {
+        const snake = document.createElement('div');
+        snake.classList.add('snake');
+        const startCell = document.getElementById(`cell-${start}`);
+        const endCell = document.getElementById(`cell-${snakes[start]}`);
+        startCell.appendChild(snake);
+        // Positioning logic can be improved
+        snake.style.width = '50px';
+        snake.style.height = '200px';
+        snake.style.transform = `rotate(${Math.random() * 360}deg)`;
+    });
+
+    Object.keys(ladders).forEach(start => {
+        const ladder = document.createElement('div');
+        ladder.classList.add('ladder');
+        const startCell = document.getElementById(`cell-${start}`);
+        const endCell = document.getElementById(`cell-${ladders[start]}`);
+        startCell.appendChild(ladder);
+        // Positioning logic can be improved
+        ladder.style.width = '50px';
+        ladder.style.height = '200px';
+        ladder.style.transform = `rotate(${Math.random() * 360}deg)`;
+    });
+}
+
+addSnakesAndLadders();
+
 function movePlayer(player, steps) {
     let newPosition = positions[player - 1] + steps;
     if (newPosition > 100) newPosition = 100;
