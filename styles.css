@@ -1,85 +1,109 @@
-body {
-    font-family: Arial, sans-serif;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #f9f9f9;
-}
-
-h1 {
-    margin-top: 20px;
-}
-
-#board {
+* {
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
     display: grid;
-    grid-template-columns: repeat(10, 50px);
-    grid-template-rows: repeat(10, 50px);
-    border: 2px solid #333;
-    margin-top: 20px;
-    position: relative;
-}
-
-#board div {
+    place-items: center;
+    overflow: hidden;
+  }
+  
+  .cont {
+    display: grid;
+    width: 600px;
+    grid-template-columns: repeat(10, 1fr);
+    margin: 0px 0 0px 0;
+  }
+  
+  .cont div {
+    width: 60px;
+    height: 60px;
+    border: 0.2px solid black;
+  }
+  
+  #p1,
+  #p2 {
     width: 50px;
     height: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 1px solid #ccc;
+    border-radius: 100px;
+    background-color: rgb(236, 82, 82);
     position: relative;
-    background: linear-gradient(135deg, #f8e5e5, #ff9999, #ffcccc);
-    box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.1), inset -2px -2px 5px rgba(255, 255, 255, 0.7);
-}
-
-#board div:nth-child(odd) {
-    background: linear-gradient(135deg, #e5f8e5, #99ff99, #ccffcc);
-}
-
-#board div:nth-child(even) {
-    background: linear-gradient(135deg, #e5e5f8, #9999ff, #ccccff);
-}
-
-.ladder, .snake {
+    border: 3px solid black;
+  
+    /* position: absolute; */
+  }
+  
+  #p1 {
+    position: relative;
+    top: 0px;
+    transition: all linear 0.5s;
+    /* top: 0; */
+    left: -62px;
+    z-index: 2;
+  }
+  
+  #p2 {
+    z-index: 2;
+    position: relative;
+    top: -55px;
+    left: -62px;
+    transition: all linear 0.5s;
+    background-color: rgb(243, 181, 46);
+  }
+  
+  img {
+    position: relative;
+    top: -615px;
+    left: 8px;
+    /* z-index: -1; */
+    margin: 0;
+    width: 615px;
+    height: 615px;
+  }
+  #diceCont {
+    display: grid;
+    place-items: center;
     position: absolute;
-    background-repeat: no-repeat;
-    background-size: contain;
-}
-
-.ladder {
-    background-image: url('ladder.png'); /* Replace with ladder image URL */
-}
-
-.snake {
-    background-image: url('snake.png'); /* Replace with snake image URL */
-}
-
-.player {
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-}
-
-.player1 {
-    background-color: yellow;
-}
-
-.player2 {
-    background-color: red;
-}
-
-.player3 {
-    background-color: blue;
-}
-
-.player4 {
-    background-color: green;
-}
-
-#controls {
-    margin-top: 20px;
-}
-
-#rollDice {
-    padding: 10px 20px;
-    font-size: 16px;
-}
+    top: 200px;
+    left: 120px;
+    font-size: 2rem;
+    z-index: 99;
+  }
+  #diceBtn {
+    z-index: 99;
+    padding: 5px;
+    cursor: pointer;
+    background-color: rgb(75, 140, 197);
+    border-radius: 5px;
+    width: 200px;
+  }
+  
+  @media (max-width: 1250px) {
+    
+    #diceCont {
+      display: flex;
+      place-items: none;
+      top: 92vh;
+      left: 36vw;
+      border: 2px solid red;
+    }
+    #diceBtn {
+      width: 200px;
+      margin-left: 20px;
+    }
+  }
+  @media (max-width: 1250px) {
+    
+    #diceCont {
+      display: flex;
+      place-items: none;
+      top: 99vh;
+      left: 10vw;
+      /* border: 2px solid red; */
+    }
+    #diceBtn {
+      width: 200px;
+      margin-left: 20px;
+    }
+  }

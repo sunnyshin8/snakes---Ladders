@@ -1,110 +1,226 @@
-const board = document.getElementById('board');
-const rollDiceButton = document.getElementById('rollDice');
-const diceResultDisplay = document.getElementById('diceResult');
-const currentPlayerDisplay = document.getElementById('currentPlayer');
+let tog = 1
+let rollingSound = new Audio('rpg-dice-rolling-95182.mp3')
+let winSound = new Audio('winharpsichord-39642.mp3')
 
-let currentPlayer = 1;
-let positions = [0, 0, 0, 0];
 
-// Create the board
-for (let i = 100; i > 0; i--) {
-    const cell = document.createElement('div');
-    cell.id = `cell-${i}`;
-    cell.textContent = i;
-    board.appendChild(cell);
-}
 
-const players = [
-    { id: 1, class: 'player1' },
-    { id: 2, class: 'player2' },
-    { id: 3, class: 'player3' },
-    { id: 4, class: 'player4' }
-];
+let p1sum = 0
+let p2sum = 0
 
-// Initialize player pieces
-players.forEach(player => {
-    const piece = document.createElement('div');
-    piece.id = `player${player.id}`;
-    piece.classList.add('player', player.class);
-    document.getElementById('cell-1').appendChild(piece);
-});
 
-const snakes = { 16: 6, 47: 26, 49: 11, 56: 53, 62: 19, 64: 60, 87: 24, 93: 73, 95: 75, 98: 78 };
-const ladders = { 1: 38, 4: 14, 9: 31, 21: 42, 28: 84, 36: 44, 51: 67, 71: 91, 80: 100 };
+function play(player, psum, correction, num) {
+    let sum
+    if (psum == 'p1sum') {
 
-// Add ladders and snakes to the board
-function addSnakesAndLadders() {
-    Object.keys(snakes).forEach(start => {
-        const snake = document.createElement('div');
-        snake.classList.add('snake');
-        const startCell = document.getElementById(`cell-${start}`);
-        const endCell = document.getElementById(`cell-${snakes[start]}`);
-        board.appendChild(snake);
-        positionElement(snake, startCell, endCell);
-    });
+        p1sum = p1sum + num
 
-    Object.keys(ladders).forEach(start => {
-        const ladder = document.createElement('div');
-        ladder.classList.add('ladder');
-        const startCell = document.getElementById(`cell-${start}`);
-        const endCell = document.getElementById(`cell-${ladders[start]}`);
-        board.appendChild(ladder);
-        positionElement(ladder, startCell, endCell);
-    });
-}
+        if (p1sum > 100) {
+            p1sum = p1sum - num
+            // sum = p1sum
+        }
 
-function positionElement(element, startCell, endCell) {
-    const startRect = startCell.getBoundingClientRect();
-    const endRect = endCell.getBoundingClientRect();
+        if (p1sum == 1) {
+            p1sum = 38
+        }
+        if (p1sum == 4) {
+            p1sum = 14
+        }
+        if (p1sum == 8) {
+            p1sum = 30
+        }
+        if (p1sum == 21) {
+            p1sum = 42
+        }
+        if (p1sum == 28) {
+            p1sum = 76
+        }
+        if (p1sum == 32) {
+            p1sum = 10
+        }
+        if (p1sum == 36) {
+            p1sum = 6
+        }
+        if (p1sum == 48) {
+            p1sum = 26
+        }
+        if (p1sum == 50) {
+            p1sum = 67
+        }
+        if (p1sum == 62) {
+            p1sum = 18
+        }
+        if (p1sum == 71) {
+            p1sum = 92
+        }
+        if (p1sum == 80) {
+            p1sum = 99
+        }
+        if (p1sum == 88) {
+            p1sum = 24
+        }
+        if (p1sum == 95) {
+            p1sum = 56
+        }
+        if (p1sum == 97) {
+            p1sum = 78
+        }
 
-    const startX = startRect.left + startRect.width / 2;
-    const startY = startRect.top + startRect.height / 2;
-    const endX = endRect.left + endRect.width / 2;
-    const endY = endRect.top + endRect.height / 2;
+        sum = p1sum
 
-    const width = Math.hypot(endX - startX, endY - startY);
-    const angle = Math.atan2(endY - startY, endX - startX) * 180 / Math.PI;
 
-    element.style.width = `${width}px`;
-    element.style.transform = `rotate(${angle}deg)`;
-    element.style.transformOrigin = '0 0';
-    element.style.position = 'absolute';
-    element.style.left = `${startX - board.getBoundingClientRect().left}px`;
-    element.style.top = `${startY - board.getBoundingClientRect().top}px`;
-}
 
-addSnakesAndLadders();
-
-function movePlayer(player, steps) {
-    let newPosition = positions[player - 1] + steps;
-    if (newPosition > 100) newPosition = 100;
-    if (snakes[newPosition]) {
-        newPosition = snakes[newPosition];
-    } else if (ladders[newPosition]) {
-        newPosition = ladders[newPosition];
     }
-    positions[player - 1] = newPosition;
 
-    document.getElementById(`cell-${positions[player - 1]}`).appendChild(document.getElementById(`player${player}`));
-}
+    if (psum == 'p2sum') {
 
-function nextPlayer() {
-    currentPlayer = (currentPlayer % 4) + 1;
-    currentPlayerDisplay.textContent = `Current Player: ${currentPlayer}`;
-}
+        p2sum = p2sum + num
 
-rollDiceButton.addEventListener('click', () => {
-    const dice = Math.floor(Math.random() * 6) + 1;
-    diceResultDisplay.textContent = `Dice: ${dice}`;
-    movePlayer(currentPlayer, dice);
+        if (p2sum > 100) {
+            p2sum = p2sum - num
+            // sum = p1sum
+        }
+        
 
-    if (positions[currentPlayer - 1] === 100) {
-        alert(`Player ${currentPlayer} wins!`);
-        positions = [0, 0, 0, 0];
-        players.forEach(player => {
-            document.getElementById('cell-1').appendChild(document.getElementById(`player${player.id}`));
-        });
-    } else {
-        nextPlayer();
+        if (p2sum == 1) {
+            p2sum = 38
+        }
+        if (p2sum == 4) {
+            p2sum = 14
+        }
+        if (p2sum == 8) {
+            p2sum = 30
+        }
+        if (p2sum == 21) {
+            p2sum = 42
+        }
+        if (p2sum == 28) {
+            p2sum = 76
+        }
+        if (p2sum == 32) {
+            p2sum = 10
+        }
+        if (p2sum == 36) {
+            p2sum = 6
+        }
+        if (p2sum == 48) {
+            p2sum = 26
+        }
+        if (p2sum == 50) {
+            p2sum = 67
+        }
+        if (p2sum == 62) {
+            p2sum = 18
+        }
+        if (p2sum == 71) {
+            p2sum = 92
+        }
+        if (p2sum == 80) {
+            p2sum = 99
+        }
+        if (p2sum == 88) {
+            p2sum = 24
+        }
+        if (p2sum == 95) {
+            p2sum = 56
+        }
+        if (p2sum == 97) {
+            p2sum = 78
+        }
+
+        sum = p2sum
+
+
+
     }
-});
+
+
+    document.getElementById(`${player}`).style.transition = `linear all .5s`
+
+
+
+
+
+    if (sum < 10) {
+
+        document.getElementById(`${player}`).style.left = `${(sum - 1) * 62}px`
+        document.getElementById(`${player}`).style.top = `${-0 * 62 - correction}px`
+
+
+    }
+
+    else if (sum == 100) {
+        winSound.play()
+        if (player == 'p1') {
+            alert("Red Won !!")
+        }
+        else if (player == 'p2') {
+            alert("Yellow Won !!")
+        }
+        location.reload()
+    }
+
+    else {
+
+        numarr = Array.from(String(sum))
+        n1 = eval(numarr.shift())
+        n2 = eval(numarr.pop())
+        // console.log(n1, n2)
+
+        if (n1 % 2 != 0) {
+
+            if (n2 == 0) {
+                document.getElementById(`${player}`).style.left = `${(9) * 62}px`
+                document.getElementById(`${player}`).style.top = `${(-n1 + 1) * 62 - correction}px`
+            }
+            else {
+                document.getElementById(`${player}`).style.left = `${(9 - (n2 - 1)) * 62}px`
+                document.getElementById(`${player}`).style.top = `${-n1 * 62 - correction}px`
+
+            }
+
+        }
+        else if (n1 % 2 == 0) {
+            if (n2 == 0) {
+
+                document.getElementById(`${player}`).style.left = `${(0) * 62}px`
+                document.getElementById(`${player}`).style.top = `${(-n1 + 1) * 62 - correction}px`
+            }
+            else {
+
+                document.getElementById(`${player}`).style.left = `${(n2 - 1) * 62}px`
+                document.getElementById(`${player}`).style.top = `${-n1 * 62 - correction}px`
+            }
+
+        }
+
+
+
+    }
+}
+
+
+document.getElementById("diceBtn").addEventListener("click", function () {
+    rollingSound.play()
+    num = Math.floor(Math.random() * (6 - 1 + 1) + 1)
+    document.getElementById("dice").innerText = num
+
+
+    if (tog % 2 != 0) {
+        document.getElementById('tog').innerText = "Yellow's Turn : "
+        play('p1', 'p1sum', 0, num)
+
+    }
+
+    else if (tog % 2 == 0) {
+        document.getElementById('tog').innerText = "Red's Turn : "
+
+        play('p2', 'p2sum', 55, num)
+
+    }
+
+    tog = tog + 1
+
+
+
+
+})
